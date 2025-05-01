@@ -1,4 +1,4 @@
-# Learning Word Vectors for Sentiment Analysis (RoBERTa-based)
+# Learning Word Vectors for Sentiment Analysis (BERT vs. RoBERTa)
 
 ## 📌 專案簡介
 
@@ -35,6 +35,26 @@
 | 效能表現         | 作為基準模型，表現穩定                         | 在多數下游任務中表現優於 BERT                      |
 
 > 📌 本專案的模型架構設計相同，主要差異在於選用的預訓練模型（BERT 或 RoBERTa），以便進行公平的比較與分析。
+
+- bert-base-uncased
+![image](https://github.com/hsutingwei/Learning-Word-Vectors-for-Sentiment-Analysis/blob/roberta-base/bert-base-uncased.png)
+
+- roberta-base
+![image](https://github.com/hsutingwei/Learning-Word-Vectors-for-Sentiment-Analysis/blob/roberta-base/roberta-base.png)
+
+透過下圖的學習曲線可觀察到 bert-base-uncased 與 roberta-base 在訓練期間的表現差異：
+
+| 指標       | BERT 表現                                             | RoBERTa 表現                                          | 差異觀察                                               |
+|------------|------------------------------------------------------|------------------------------------------------------|--------------------------------------------------------|
+| Loss       | 訓練 loss 快速下降並穩定；但 validation loss 在第 3~6 epoch 間略為上升 | Loss 同樣快速下降，但 validation loss 整體低於 BERT     | RoBERTa 有更好的 generalization，驗證 loss 較低        |
+| Accuracy   | 訓練 acc 達 100%，val 約 91%                          | 訓練 acc 亦為 100%，val 約 94%                        | RoBERTa 在驗證集準確率略高，顯示泛化能力更強           |
+| F1-score   | 訓練 F1 幾乎為 1，val 約 91%                           | 訓練 F1 同樣接近 1，val 約 95%                         | RoBERTa 在類別平衡下表現更佳                            |
+| Recall     | 訓練 recall 幾乎為 1，val 約 91%                       | 訓練 recall 幾乎為 1，val 約 95%                       | RoBERTa 提高了整體召回能力                              |
+| Precision  | 訓練 precision 幾乎為 1，val 約 91%                    | 訓練 precision 幾乎為 1，val 約 95%                    | RoBERTa 對分類準確性有更高掌握度                        |
+
+
+> 📌 結論
+從以上指標可見，在相同模型架構設計與訓練流程下，roberta-base 相較於 bert-base-uncased 在 validation 各項指標皆略優，特別是在 F1、recall、precision 上有穩定優勢，顯示出 RoBERTa 的預訓練策略與語料能有效提升下游任務表現。
 
 
 ## 📈 成果與觀察
